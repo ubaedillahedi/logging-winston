@@ -1,17 +1,10 @@
-const express = require("express");
-const app = express();
-const expressWinston = require("express-winston");
-const { transports, format } = require("winston");
+const express = require('express')
+const logger = require('./logger')
+const app = express()
 
-app.use(
-  expressWinston.logger({
-    transports: [new transports.Console()],
-    format: format.json(),
-  })
-);
+app.get('/', (req, res) => {
+  logger.info('Server Listening On Port 5001')
+  res.sendStatus(200)
+})
 
-app.get("/", (req, res) => {
-  res.sendStatus(200);
-});
-
-app.listen(5001);
+app.listen(5001)
